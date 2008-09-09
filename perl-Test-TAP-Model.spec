@@ -1,6 +1,6 @@
 %define module   Test-TAP-Model
 %define version    0.10
-%define release    %mkrel 1
+%define release    %mkrel 2
 
 Name:       perl-%{module}
 Version:    %{version}
@@ -39,13 +39,14 @@ make test
 %install
 rm -rf %{buildroot}
 %makeinstall_std
+rm -f %{buildroot}%{perl_vendorlib}/Test/TAP/example.pl
 
 %clean
 rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%doc Changes
+%doc Changes example.pl
 %{_mandir}/man3/*
 %{perl_vendorlib}/Test
 
