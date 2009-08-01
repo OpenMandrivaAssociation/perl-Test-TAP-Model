@@ -1,20 +1,21 @@
-%define module   Test-TAP-Model
-%define version    0.10
-%define release    %mkrel 2
+%define upstream_name    Test-TAP-Model
+%define upstream_version 0.10
 
-Name:       perl-%{module}
-Version:    %{version}
-Release:    %{release}
-License:    GPL or Artistic
-Group:      Development/Perl
+Name:       perl-%{upstream_name}
+Version:    %perl_convert_version %{upstream_version}
+Release:    %mkrel 1
+
 Summary:    Accessible (queryable, serializable object) result collector
-Url:        http://search.cpan.org/dist/%{module}
-Source:     http://www.cpan.org/modules/by-module/Test/%{module}-%{version}.tar.gz
+License:    GPL+ or Artistic
+Group:      Development/Perl
+Url:        http://search.cpan.org/dist/%{upstream_name}
+Source0:    http://www.cpan.org/modules/by-module/Test/%{upstream_name}-%{upstream_version}.tar.gz
+
 BuildRequires: perl(Method::Alias)
 BuildRequires: perl(Test::Harness)
 BuildRequires: perl(Test::More)
 BuildArch: noarch
-BuildRoot:  %{_tmppath}/%{name}-%{version}
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
 
 %description
 This module is a subclass of the Test::Harness::Straps manpage (although in
@@ -27,7 +28,7 @@ It's purpose is to ease the processing of test data, for the purpose of
 generating reports, or something like that.
 
 %prep
-%setup -q -n %{module}-%{version} 
+%setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
 %{__perl} Makefile.PL INSTALLDIRS=vendor
@@ -49,4 +50,3 @@ rm -rf %{buildroot}
 %doc Changes example.pl
 %{_mandir}/man3/*
 %{perl_vendorlib}/Test
-
